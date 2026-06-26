@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { Tour, Hotspot } from "../types";
-
+const BASE = import.meta.env.VITE_API_URL || "";
 
 const ViewTour: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -13,7 +13,7 @@ const ViewTour: React.FC = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`/api/tours/public/${id}`)
+    fetch(`${BASE}/api/tours/public/${id}`)
       .then((r) => r.json())
       .then((data) => {
         if (data.error) { setError(data.error); setLoading(false); return; }
